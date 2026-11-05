@@ -74,7 +74,7 @@ class Handler(SimpleHTTPRequestHandler):
             if not self.session(): return self.reply(401,{'error':'請先輸入家庭共用密碼。'})
             with db() as conn: row=conn.execute('SELECT revision,data,editor,updated FROM plan WHERE id=1').fetchone()
             return self.reply(200,{'revision':row[0],'plan':json.loads(row[1]),'editor':row[2],'updated':row[3]})
-        if path not in ('/','/index.html','/app.js','/style.css','/trip.json','/favicon.ico'):
+        if path not in ('/','/index.html','/app.js','/style.css','/trip.json','/favicon.ico','/standalone.html'):
             return self.reply(404,{'error':'Not found'})
         return super().do_GET()
     def do_POST(self):
